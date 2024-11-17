@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Paris - Analyse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-white border-gray-200 dark:bg-gray-900 shadow-md">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="index.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">BetCalculator</span>
+            </a>
+            <div class="hidden w-full md:block md:w-auto">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li>
+                        <a href="index.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="calculator.html" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0">Calculateur</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto mt-8 px-4">
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Formulaire d'analyse -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-6">Analyse du Match</h2>
+                
+                <!-- Sélection du match -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">
+                        Sélectionner un match
+                    </label>
+                    <select id="matchSelect" class="w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <option selected>Choisir un match</option>
+                    </select>
+                </div>
+
+                <!-- Forme -->
+                <div class="mb-6">
+                    <h3 class="font-bold text-lg mb-3">Forme (250 points)</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                Victoires (/5)
+                            </label>
+                            <input type="number" id="victoires" min="0" max="5" 
+                                   class="w-full p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                Buts marqués
+                            </label>
+                            <input type="number" id="butsMarques" min="0" 
+                                   class="w-full p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                Clean sheets
+                            </label>
+                            <input type="number" id="cleanSheets" min="0" max="5" 
+                                   class="w-full p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                Matches sans défaite
+                            </label>
+                            <input type="number" id="sansDefaite" min="0" max="5" 
+                                   class="w-full p-2 border rounded">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Composition -->
+                <div class="mb-6">
+                    <h3 class="font-bold text-lg mb-3">Composition (200 points)</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                Titulaires disponibles
+                            </label>
+                            <input type="number" id="titulaires" min="0" max="11" 
+                                   class="w-full p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                Absents clés
+                            </label>
+                            <input type="number" id="absents" min="0" 
+                                   class="w-full p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                Qualité banc (/5)
+                            </label>
+                            <input type="number" id="qualiteBanc" min="0" max="5" 
+                                   class="w-full p-2 border rounded">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contexte -->
+                <div class="mb-6">
+                    <h3 class="font-bold text-lg mb-3">Contexte (150 points)</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                Importance match (/5)
+                            </label>
+                            <input type="number" id="importance" min="0" max="5" 
+                                   class="w-full p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                Avantage terrain (/5)
+                            </label>
+                            <input type="number" id="avantageTerrain" min="0" max="5" 
+                                   class="w-full p-2 border rounded">
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="calculateAndDisplay()" 
+                        class="w-full bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition font-bold">
+                    Calculer le score
+                </button>
+            </div>
+
+            <!-- Résultats -->
+            <div id="result" class="space-y-6">
+                <!-- Les résultats seront injectés ici -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white shadow-md mt-12">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+            <span class="block text-sm text-gray-500 text-center">© 2024 BetCalculator. Tous droits réservés.</span>
+        </div>
+    </footer>
+
+    <script src="calculator.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+</html>
